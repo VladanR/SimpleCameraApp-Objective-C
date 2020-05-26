@@ -16,16 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    photoPicker = [[UIImagePickerController alloc] init];
+    photoPicker.delegate = self;
     // Do any additional setup after loading the view.
 }
 
 
 - (IBAction)savePhoto:(id)sender {
+    
+    UIImage *photoToSave = self.imageView.image;
+    UIImageWriteToSavedPhotosAlbum(photoToSave, nil, nil, nil);
+    
 }
 
 - (IBAction)chosePhoto:(id)sender {
     
-    
+    [photoPicker setSourceType:UIImagePickerControllerSourceTypePhotoLibrary];
+    [self presentViewController:photoPicker animated:YES completion:NULL];
     
 }
 
@@ -45,8 +52,7 @@
 
 - (IBAction)takePhoto:(id)sender {
     
-    photoPicker = [[UIImagePickerController alloc] init];
-    photoPicker.delegate = self;
+    
     [photoPicker setSourceType:UIImagePickerControllerSourceTypeCamera];
     [self presentViewController:photoPicker animated:YES completion:NULL];
     
